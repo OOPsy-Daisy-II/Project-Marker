@@ -1,0 +1,22 @@
+Assignment Grader Requirements:
+
+Assignment spec:
+- names of files
+- attributes for each file
+- methods for each file
+
+
+Check 1:
+take list of all studentfiles
+compare filenames to names in spec -> assign the grade
+
+Check 2: 
+(loop through all the studentFiles)
+Take path to .java file
+open the java file
+compare attribute names to that in the spec
+
+Check 3:
+(loop through all the student files)
+take path to .java file
+run junit tests for methods in the spec...if passed assign grades accordingly
