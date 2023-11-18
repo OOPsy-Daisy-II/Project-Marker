@@ -8,13 +8,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import oopsy_daisy.FileTitleChecker;
+
 
 
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+       
 
 
         String inputpath = "C:/Users/nickd/OneDrive/Desktop/StudentAssignments.zip";
@@ -34,25 +36,12 @@ public class App
        
        try{studentpaths = UnZipper.getStudentFiles(testPath);} catch (IOException e){}
 
-       for (String ele: studentpaths){
-        System.out.println(ele); 
-       }
 
-       String file1path = studentpaths.get(0);
+       FileTitleChecker neewf = new FileTitleChecker();
 
-       File newfile = new File(file1path);
+       neewf.GradeSection(studentpaths);
 
-       try{
-        Scanner myReader = new Scanner(newfile);
-            while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
-            System.out.println(data);
-            
-        }
-        myReader.close();
-       }catch (FileNotFoundException e){}
-        
-       
+
 
 
         

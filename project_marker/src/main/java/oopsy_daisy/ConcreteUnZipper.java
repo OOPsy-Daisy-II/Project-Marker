@@ -28,10 +28,11 @@ import java.util.stream.Collectors;
 //Reference:
 //https://www.baeldung.com/java-compress-and-uncompress
 
-public class UnZipper {
+public class ConcreteUnZipper implements UnZipperInterface{
     //Code for zip file opener
     
-    public static void unZipIt(String zipFile, String outputFolder) throws IOException {
+    public void unZipIt(String zipFile, String outputFolder) {
+        try{
         String fileZip = zipFile;
         File destDir = new File(outputFolder);
 
@@ -64,9 +65,16 @@ public class UnZipper {
 
         zis.closeEntry();
         zis.close();
+        }catch (IOException e){
+            System.out.println("error unzipping file"); 
+        }
     }
 
-    public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+
+
+
+    public File newFile(File destinationDir, ZipEntry zipEntry)  {
+        try{
         File destFile = new File(destinationDir, zipEntry.getName());
 
         String destDirPath = destinationDir.getCanonicalPath();
@@ -77,9 +85,13 @@ public class UnZipper {
         }
 
         return destFile;
+        }catch (IOException e){
+            System.out.println("error unzipping file"); 
+        }
     }
     
-    public static ArrayList<String> getFileListInDirectory(String directoryName) throws IOException { //gets a list of all the filenames in a directory1
+    public ArrayList<String> getFileListInDirectory(String directoryName){ //gets a list of all the filenames in a directory1
+        try{
         ArrayList<String> directoryListing = new ArrayList<String>();
         
         File[] files = new File(directoryName).listFiles();
@@ -92,10 +104,13 @@ public class UnZipper {
             }
         
         return directoryListing;
+        }catch (IOException e){
+            System.out.println("error unzipping file"); 
+        }
     }
     
     //unzip individual assignments and return pathProducer
-    public static ArrayList<String> unZipList(String directory, ArrayList<String> directoryListing) throws IOException {
+    public ArrayList<String> unZipList(String directory, ArrayList<String> directoryListing) throws IOException {
         ArrayList<String> subDirectoryListing = new ArrayList<String>();
         
         if (directoryListing != null)
@@ -120,7 +135,7 @@ public class UnZipper {
         return subDirectoryListing;
     }
     
-    public static ArrayList<String> UnZipMasterFile(String inputPath)
+    public ArrayList<String> UnZipMasterFile(String inputPath)
     {
         //Test usage
         String MASTER_INPUT_ZIP = inputPath;
@@ -179,7 +194,7 @@ public class UnZipper {
     
 
 
-    public static List<String> getStudentFiles(String folderPath)throws IOException{
+    public List<String> getStudentFiles(String folderPath)throws IOException{
         Path folder = Paths.get(folderPath);
 
         if (Files.exists(folder) && Files.isDirectory(folder)) {

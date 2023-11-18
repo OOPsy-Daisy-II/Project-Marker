@@ -1,12 +1,9 @@
 package oopsy_daisy;
 
-public class AssignmentGrader {
+public abstract class AssignmentGrader {
     //Code for Assignment Grader section
 
-    
-
-
-
+    GradeTemplate Grader;
 
 
 }
