@@ -14,12 +14,12 @@ import java.util.zip.ZipInputStream;
 
 public class ConcreteUnZipperTest{
 
-    public ConcreteUnZipper unZipper;
-    String outputFolder;
-    String zipFile;
-    File destDir;
-    ZipInputStream zis;
-    ZipEntry zipEntry;
+    private ConcreteUnZipper unZipper;
+    private String outputFolder;
+    private String zipFile;
+    private File destDir;
+    private ZipInputStream zis;
+    private ZipEntry zipEntry;
 
 
     @Before
@@ -78,7 +78,7 @@ public class ConcreteUnZipperTest{
 
     @Test
     public void testGetStudentFiles(){
-
+        assertFalse(unZipper.getStudentFiles("/workspaces/Project-Marker/project_marker/src/main/java/oopsy_daisy/SampleAssignment").isEmpty());
     }
 
 }
