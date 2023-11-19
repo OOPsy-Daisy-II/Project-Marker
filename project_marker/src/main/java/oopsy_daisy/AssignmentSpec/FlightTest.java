@@ -1,5 +1,6 @@
-package oopsy_daisy;
+package oopsy_daisy.AssignmentSpec;
 
+import oopsy_daisy.SampleAssignment.*;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,5 @@
-package oopsy_daisy;
+package oopsy_daisy.AssignmentSpec;
+import oopsy_daisy.SampleAssignment.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -71,10 +72,10 @@ public class LuggageManifestTest {
   @Test
   public void testGetExcessLuggageCostByPassenger() {
     manifest.addLuggage(passenger1, flight);
-    assertEquals("0", manifest.getExcessLuggageCostByPassenger("TA890789", 0));
+    assertEquals("0", manifest.getExcessLuggageCostByPassenger("TA890789"));
     
     manifest.addLuggage(passenger2, flight);
-    assertEquals("35", manifest.getExcessLuggageCostByPassenger("BA321963", 35));
+    assertEquals("35", manifest.getExcessLuggageCostByPassenger("BA321963"));
 
     totalScore += 5; // Award totalScore for getExcessLuggageCostByPassenger test
   }

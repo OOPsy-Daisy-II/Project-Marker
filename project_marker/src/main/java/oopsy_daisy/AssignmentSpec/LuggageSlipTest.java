@@ -1,4 +1,5 @@
-package oopsy_daisy;
+package oopsy_daisy.AssignmentSpec;
+import oopsy_daisy.SampleAssignment.*;
 
 import static org.junit.Assert.*;
 
@@ -56,7 +57,7 @@ public class LuggageSlipTest {
   totalScore += 1;  
 
   // Test counter
-  assertEquals(1, LuggageSlip.getLuggageSlipIDCounter());
+  assertEquals(1, slip.getLuggageSlipIDCounter());
   totalScore += 1;
 
   // Test ID
