@@ -16,30 +16,26 @@ public class App
 {
     public static void main( String[] args )
     {
-       
-
-
         String inputpath = "C:/Users/nickd/OneDrive/Desktop/StudentAssignments.zip";
+        ConcreteUnZipper UnZipper = new ConcreteUnZipper();
+        List<String> StudentAssignmentFiles = new ArrayList<>(); 
+        ArrayList<String> StudentAssignmentPaths = new ArrayList<>();
+
+        StudentAssignmentPaths = UnZipper.UnZipMasterFile(inputpath);
+
+        for(String AsgPath: StudentAssignmentPaths){
+            StudentAssignmentFiles = UnZipper.getStudentFiles(AsgPath);
+            
+            
+            FileTitleChecker neewf = new FileTitleChecker();
+            neewf.GradeSection(StudentAssignmentFiles);
+        }
+
+        // testPath = StudentAssignmentPaths.get(0); 
+        // studentpaths = UnZipper.getStudentFiles(testPath);
 
 
-       ArrayList<String> StudentAssignmentPaths = new ArrayList<>(); 
-
-       StudentAssignmentPaths = UnZipper.UnZipMasterFile(inputpath); 
-
-       for ( String element: StudentAssignmentPaths){
-        System.out.println(element);
-       }
-
-       String testPath = StudentAssignmentPaths.get(0); 
-
-       List<String> studentpaths = new ArrayList<>(); 
        
-       try{studentpaths = UnZipper.getStudentFiles(testPath);} catch (IOException e){}
-
-
-       FileTitleChecker neewf = new FileTitleChecker();
-
-       neewf.GradeSection(studentpaths);
 
 
 
