@@ -1,15 +1,13 @@
 package oopsy_daisy;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
-import oopsy_daisy.FileTitleChecker;
 
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 
 public class App 
@@ -21,27 +19,29 @@ public class App
         // String specpath = "FlightMarkerSpec.txt";
         ConcreteUnZipper UnZipper = new ConcreteUnZipper();
         List<String> StudentAssignmentFiles = new ArrayList<>(); 
-        ArrayList<String> StudentAssignmentPaths = new ArrayList<>();
+        // ArrayList<String> StudentAssignmentPaths = new ArrayList<>();
 
 
-        StudentAssignmentPaths = UnZipper.UnZipMasterFile(inputpath);
+        List<String> StudentAssignmentPaths = UnZipper.UnZipMasterFile(inputpath);
 
         for(String AsgPath: StudentAssignmentPaths){
-            StudentAssignmentFiles = UnZipper.getStudentFiles(AsgPath);
+            StudentAssignmentFiles.addAll(UnZipper.getStudentFiles(AsgPath));
             
-            // FileTitleChecker neewf = new FileTitleChecker();
-            // neewf.GradeSection(StudentAssignmentFiles);
-            FileMethodChecker methodChecker  = new FileMethodChecker();
-            methodChecker.GradeSection(StudentAssignmentFiles);
         }
 
-       
+ 
 
+        Result result = JUnitCore.runClasses(FlightTest.class);
 
-       
+        for (Failure failure : result.getFailures()) {
+            System.out.println("Test Failed: " + failure.toString());
+        }
 
-
-
+        if (result.wasSuccessful()) {
+            System.out.println("All tests passed!");
+        } else {
+            System.out.println(result.getFailureCount() + " test(s) failed.");
+        }
 
         
     }
