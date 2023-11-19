@@ -9,6 +9,8 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import oopsy_daisy.AssignmentSpec.FlightTest;
+
 
 public class App 
 {
@@ -31,7 +33,7 @@ public class App
 
  
 
-        Result result = JUnitCore.runClasses(FlightTest.class);
+        Result result = JUnitCore.runClasses(oopsy_daisy.AssignmentSpec.FlightTest.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println("Test Failed: " + failure.toString());
@@ -43,6 +45,16 @@ public class App
             System.out.println(result.getFailureCount() + " test(s) failed.");
         }
 
-        
+        int flightscore= FlightTest.totalScore; 
+        System.out.println("the flight score is: " + flightscore);
+
+
+        //code to implement PDF Observer
+
+        AssignmentGrader AsGrader = new AssignmentGrader();
+        Observer PDFGenerator = new GeneratePDF();
+        AsGrader.addObserver(PDFGenerator);
+        AsGrader.gradeAssignments();
+
     }
 }

@@ -16,7 +16,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class GeneratePDF {
+public class GeneratePDF implements Observer{
     public GeneratePDF(){
 
     }
@@ -62,14 +62,13 @@ public class GeneratePDF {
     }
 
 
-    public boolean AddGrade(){
+    public void update(){
         
+        System.out.println("the pdf observer was triggered"); 
 
 
 
 
-
-        return true;
     }
 
 
