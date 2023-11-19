@@ -28,40 +28,11 @@ public class FileMethodChecker extends GradeTemplate{
 
         String testPath = "project_marker/src/AssignmentSpec/FlightTest.java";
 
-        Result result = runExternalTests(testPath);
-        // JUnitCore junit = new JUnitCore();
-        // junit.addListener(new TextListener(System.out));
-        // junit.run(FirstUnitTest.class);
-
-        for (Failure failure : result.getFailures()) {
-            System.out.println("Test Failed: " + failure.toString());
-        }
-
-        if (result.wasSuccessful()) {
-            System.out.println("All tests passed!");
-        } else {
-            System.out.println(result.getFailureCount() + " test(s) failed.");
-        }
+        
 
     }
 
-    private static Result runExternalTests(String testPath){
-        try{
-            
-            URL testPathURL = new File(testPath).toURI().toURL();
-            URLClassLoader classLoader = new URLClassLoader(new URL[]{testPathURL});
-            
-            System.out.println("we inside the runexternaltests class" + classLoader); 
-            return JUnitCore.runClasses(classLoader.loadClass("oopsy_daisy.FlightTest"));
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-            return null; 
-        }
-
-
-    }
+    
 
     
 }

@@ -18,7 +18,7 @@ public class App
     {
         //Step 1: unzip the files and open the Assignment Spec
         String inputpath = "C:/Users/nickd/OneDrive/Desktop/StudentAssignments.zip";
-        String specpath = "FlightMarkerSpec.txt";
+        // String specpath = "FlightMarkerSpec.txt";
         ConcreteUnZipper UnZipper = new ConcreteUnZipper();
         List<String> StudentAssignmentFiles = new ArrayList<>(); 
         ArrayList<String> StudentAssignmentPaths = new ArrayList<>();
