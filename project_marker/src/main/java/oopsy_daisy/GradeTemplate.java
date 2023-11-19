@@ -12,6 +12,8 @@ public abstract class GradeTemplate {
         return path.substring(index + 1);
     }
 
+
+
     protected String getSpecInfo(){
 
 
@@ -19,6 +21,7 @@ public abstract class GradeTemplate {
     }
 
 
+    
     public abstract void GradeSection(List<String>studentpaths); //to refactor with strategy pattern 
 
 

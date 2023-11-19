@@ -16,23 +16,26 @@ public class App
 {
     public static void main( String[] args )
     {
+        //Step 1: unzip the files and open the Assignment Spec
         String inputpath = "C:/Users/nickd/OneDrive/Desktop/StudentAssignments.zip";
+        String specpath = "FlightMarkerSpec.txt";
         ConcreteUnZipper UnZipper = new ConcreteUnZipper();
         List<String> StudentAssignmentFiles = new ArrayList<>(); 
         ArrayList<String> StudentAssignmentPaths = new ArrayList<>();
+
 
         StudentAssignmentPaths = UnZipper.UnZipMasterFile(inputpath);
 
         for(String AsgPath: StudentAssignmentPaths){
             StudentAssignmentFiles = UnZipper.getStudentFiles(AsgPath);
             
-            
-            FileTitleChecker neewf = new FileTitleChecker();
-            neewf.GradeSection(StudentAssignmentFiles);
+            // FileTitleChecker neewf = new FileTitleChecker();
+            // neewf.GradeSection(StudentAssignmentFiles);
+            FileMethodChecker methodChecker  = new FileMethodChecker();
+            methodChecker.GradeSection(StudentAssignmentFiles);
         }
 
-        // testPath = StudentAssignmentPaths.get(0); 
-        // studentpaths = UnZipper.getStudentFiles(testPath);
+       
 
 
        

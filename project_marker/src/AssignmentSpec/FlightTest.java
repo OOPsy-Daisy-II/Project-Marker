@@ -8,6 +8,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
+
 public class FlightTest {
 
   static int totalScore = 0;
