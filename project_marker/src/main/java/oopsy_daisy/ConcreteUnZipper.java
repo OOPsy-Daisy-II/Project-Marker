@@ -74,9 +74,9 @@ public class ConcreteUnZipper implements UnZipperInterface{
 
 
     public File newFile(File destinationDir, ZipEntry zipEntry)  {
-        try{
+        
         File destFile = new File(destinationDir, zipEntry.getName());
-
+        try{
         String destDirPath = destinationDir.getCanonicalPath();
         String destFilePath = destFile.getCanonicalPath();
 
@@ -84,33 +84,39 @@ public class ConcreteUnZipper implements UnZipperInterface{
             throw new IOException("Entry is outside of the target dir: " + zipEntry.getName());
         }
 
-        return destFile;
+        
         }catch (IOException e){
             System.out.println("error unzipping file"); 
         }
+        return destFile;
+        
     }
     
     public ArrayList<String> getFileListInDirectory(String directoryName){ //gets a list of all the filenames in a directory1
-        try{
-        ArrayList<String> directoryListing = new ArrayList<String>();
         
+        ArrayList<String> directoryListing = new ArrayList<String>();
+        try{
         File[] files = new File(directoryName).listFiles();
         
-        if (files != null)
+        if (files != null){
             for (File file : files) {
                 if (file.isFile()) {
                     directoryListing.add(file.getName());
                 }
             }
-        
-        return directoryListing;
+        }
+        else{
+            throw new IOException("There was an error"); 
+        }
+            
         }catch (IOException e){
             System.out.println("error unzipping file"); 
         }
+        return directoryListing;
     }
     
     //unzip individual assignments and return pathProducer
-    public ArrayList<String> unZipList(String directory, ArrayList<String> directoryListing) throws IOException {
+    public ArrayList<String> unZipList(String directory, ArrayList<String> directoryListing){
         ArrayList<String> subDirectoryListing = new ArrayList<String>();
         
         if (directoryListing != null)
@@ -127,7 +133,7 @@ public class ConcreteUnZipper implements UnZipperInterface{
                         subDirectoryName = file.substring(0, pos);
                         fullSubDirectoryName = directory + File.separator + subDirectoryName;
                         subDirectoryListing.add(fullSubDirectoryName);
-                        UnZipper.unZipIt(directory + File.separator + file, fullSubDirectoryName);
+                        unZipIt(directory + File.separator + file, fullSubDirectoryName);
                     }
                 }
             }
@@ -148,25 +154,35 @@ public class ConcreteUnZipper implements UnZipperInterface{
             masterOutputDirectory = MASTER_INPUT_ZIP;
         
         try {
-            UnZipper.unZipIt(MASTER_INPUT_ZIP, masterOutputDirectory);
-        } catch (IOException ex) {
-            // TODO: handle exception
-            ex.printStackTrace();
-        } catch (Exception e) {
+            unZipIt(MASTER_INPUT_ZIP, masterOutputDirectory);
+            if(masterOutputDirectory == ""){
+                throw new IOException("unzip file Failed");
+            }
+        } catch (IOException e) {
             // TODO: handle exception
             e.printStackTrace();
-        }
+        } 
+        // catch (Exception e) {
+        //     // TODO: handle exception
+        //     e.printStackTrace();
+        // }
 
         System.out.println("Unzipping master file complete.");
         
         ArrayList<String> directoryListing = new ArrayList<String>();
         
         try {
-            directoryListing = UnZipper.getFileListInDirectory(masterOutputDirectory);
-        } catch (IOException ex) {
-            // TODO: handle exception
-            ex.printStackTrace();
-        } catch (Exception e) {
+            directoryListing = getFileListInDirectory(masterOutputDirectory);
+
+            // if(directoryListing.isEmpty()){
+            //     throw new IOException("List is empty");
+            // }
+        } 
+        // catch (IOException ex) {
+        //     // TODO: handle exception
+        //     ex.printStackTrace();
+        // } 
+        catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
@@ -177,14 +193,15 @@ public class ConcreteUnZipper implements UnZipperInterface{
         ArrayList<String> subDirectoryListing = new ArrayList<String>();
         
         try {
-            subDirectoryListing = UnZipper.unZipList(masterOutputDirectory, directoryListing);
-        } catch (IOException ex) {
+            subDirectoryListing = unZipList(masterOutputDirectory, directoryListing);
+        } catch (Exception ex) {
             // TODO: handle exception
             ex.printStackTrace();
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
+        } 
+        // catch (Exception e) {
+        //     // TODO: handle exception
+        //     e.printStackTrace();
+        // }
         
         System.out.println("\nUnzipping zip files in subdirectories complete.");
         // System.out.println("Newly created subdirectories listing:");
@@ -194,20 +211,27 @@ public class ConcreteUnZipper implements UnZipperInterface{
     
 
 
-    public List<String> getStudentFiles(String folderPath)throws IOException{
+    public List<String> getStudentFiles(String folderPath){
         Path folder = Paths.get(folderPath);
-
-        if (Files.exists(folder) && Files.isDirectory(folder)) {
-            List<String> javaFilePaths = Files.walk(folder)
+        
+            if (Files.exists(folder) && Files.isDirectory(folder)) {
+                try{
+                    return Files.walk(folder)
                     .filter(path -> path.toString().endsWith(".java"))
                     .map(Path::toString)
                     .collect(Collectors.toList());
-            return javaFilePaths;
+                }catch (IOException e){
+                    System.out.println("Error"); 
+                    return null;
+                }
+            
         } else {
             throw new IllegalArgumentException("Folder does not exist: " + folderPath);
         }
 
     }
+        
+
 
 
 
