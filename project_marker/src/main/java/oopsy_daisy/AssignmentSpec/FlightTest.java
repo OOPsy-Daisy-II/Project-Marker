@@ -12,7 +12,7 @@ import org.junit.Test;
 
 
 
-public class FlightTest {
+public class FlightTest extends BaseTest{
 
   static int totalScore = 0;
 
@@ -129,7 +129,14 @@ public void testPrintLuggageManifest() {
 
   @AfterClass
   public static void printTotal() {
-    System.out.println("Total Score: " + totalScore);
+    System.out.println("FlightTest Total Score: " + totalScore);
+    finalScore += totalScore;
   }
+
+  @Override
+  public int test() {
+    
+    return totalScore;
+}
 
 }

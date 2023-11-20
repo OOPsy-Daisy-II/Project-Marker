@@ -6,7 +6,7 @@ import org.junit.AfterClass;
 import org.junit.Test;
 
 
-public class PassengerTest {
+public class PassengerTest extends BaseTest{
 
   static int totalScore = 0;
   
@@ -75,7 +75,15 @@ public void testAttributes() {
   
   @AfterClass
   public static void printTotal() {
-    System.out.println("Total Score: " + totalScore);
+    System.out.println("PassengerTest Total Score: " + totalScore);
+    finalScore += totalScore;
   }
+
+  @Override
+  public int test() {
+    
+    return totalScore;
+}
+
 
 }
