@@ -10,8 +10,8 @@ public class TestAssignmentGrader {
     private AssignmentGrader ag;
 
     @Before
-    void setUp() {
-        o = new GeneratePDF();
+    public void setUp() {
+        o = new GeneratePDF("project_marker/src/main/java/oopsy_daisy/AssignmentSpec");
         ag = new AssignmentGrader();
     }
     
