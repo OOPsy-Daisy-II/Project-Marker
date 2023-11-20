@@ -52,7 +52,7 @@ public class App
         //code to implement PDF Observer
 
         AssignmentGrader AsGrader = new AssignmentGrader();
-        Observer PDFGenerator = new GeneratePDF();
+        Observer PDFGenerator = new GeneratePDF("project_marker/src/main/java/oopsy_daisy/AssignmentSpec");
         AsGrader.addObserver(PDFGenerator);
         AsGrader.gradeAssignments();
 
