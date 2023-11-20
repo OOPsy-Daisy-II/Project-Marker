@@ -21,11 +21,12 @@ public class TestAssignmentGrader {
         assertTrue(ag.getMonitors().contains(o));
     }
 
+    @Test
     public void testDetachObserver(){
         ag.detachObserver(o);
         assertFalse(ag.getMonitors().contains(o));
     }
 
-    
+
 
 }
