@@ -33,6 +33,10 @@ public class GeneratePDF implements Observer{
     PdfPTable table;
 
     public GeneratePDF(String specPath){
+        CreatePDF(specPath);
+    }
+
+    public void CreatePDF(String specPath){
         Document document = new Document();
         document.setPageSize(PageSize.A4.rotate());
         
@@ -72,6 +76,15 @@ public class GeneratePDF implements Observer{
             table.addCell(new PdfPCell(new Paragraph("Total")));
             table.addCell(new PdfPCell(new Paragraph("Comments")));
 
+
+            ArrayList<Integer> marks = new ArrayList<>();
+            marks.add(12);
+            marks.add(13);
+            marks.add(41);
+            marks.add(32);
+
+            addRows(table, "816031079", marks);
+
             document.add(table);
 
 
@@ -83,19 +96,20 @@ public class GeneratePDF implements Observer{
     }
 
     
-    private void addRows(String ID, ArrayList<Integer> marks ) {
+    private void addRows(PdfPTable table, String ID, ArrayList<Integer> marks ) {
         int numColumns = marks.size();
-        System.out.println("MUMCOLUMNS: " + numColumns);
-        table.addCell(ID);
+        System.out.println("Adding Rows to table");
+
+        table.addCell(new PdfPCell(new Paragraph(ID)));
         int total = 0;
         for (int i =0; i<numColumns; i++){
-                PdfPCell cell = new PdfPCell(new Paragraph(marks.get(i)));
+                PdfPCell cell = new PdfPCell(new Paragraph(String.valueOf(marks.get(i))));
                 total +=marks.get(i);
                 System.out.println("TOTAL "+ total);
                 table.addCell(cell);
              }
             
-        table.addCell(new PdfPCell(new Paragraph(total)));
+        table.addCell(new PdfPCell(new Paragraph(String.valueOf(total))));
         table.addCell(new PdfPCell(new Paragraph("Comments")));
 
 
@@ -116,10 +130,10 @@ public class GeneratePDF implements Observer{
         marks.add(41);
         marks.add(32);
 
-        addRows(newtable, "816031079", marks); 
+        addRows(table, "816031079", marks); 
 
-        temp.add(newtable);
-        temp.close();
+        // temp.add(newtable);
+        // temp.close();
 
         // com.itextpdf.kernel.pdf.PdfMerger merger = new com.itextpdf.kernel.pdf.PdfMerger(pdf);
 
@@ -131,9 +145,7 @@ public class GeneratePDF implements Observer{
 
 
     }
-    catch (DocumentException e){
-            System.out.println("Error creating pdf");
-    }}
+    
 
 
 
