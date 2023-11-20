@@ -40,9 +40,9 @@ public class ConcreteUnZipperTest{
     @Test
     public void testUnZipIt(){
         
-        unZipper.unZipIt("testFolder", "//workspaces//Project-Marker//project_marker//src");
+        unZipper.unZipIt(zipFile, outputFolder);
         try{
-        File file = new File("//workspaces//Project-Marker//project_marker//src//testZipper//test.txt");
+        File file = new File(outputFolder + "StudentAssignments");
         
         assertNotNull(file);
         }
