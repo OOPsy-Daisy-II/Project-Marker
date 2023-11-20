@@ -10,27 +10,31 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.util.List; 
+import java.util.ArrayList; 
 
-public class GeneratePDF {
-    public GeneratePDF(){
+public class GeneratePDF implements Observer{
+    PdfPTable table;
 
-    }
-
-    public boolean CreatePDF(){
+    public GeneratePDF(String specPath){
         Document document = new Document();
+        document.setPageSize(PageSize.A4.rotate());
         
+        ExamineSpec examiner = new ExamineSpec(specPath);
+        int columnCount = examiner.getCount();
+        List<String> TestFileList = examiner.getFilenames();
 
         try{
             try{
                 PdfWriter.getInstance(document, new FileOutputStream("AssignmentGrade.pdf"));
             } catch (FileNotFoundException e){
                 System.out.println("file not found"); 
-                return false; 
             }
             
 
@@ -43,10 +47,20 @@ public class GeneratePDF {
             Paragraph newLine = new Paragraph("\n"); // You can customize the content within the paragraph
             document.add(newLine);
 
-            PdfPTable table = new PdfPTable(2); //number of columns 
-                addTableHeader(table);
-                addRows(table, "816029783", "43");
-               
+            int numberOfColumns = columnCount +3;
+             table = new PdfPTable (numberOfColumns);
+             table.setWidthPercentage(100);
+
+             table.addCell(new PdfPCell(new Paragraph("StudentID")));
+            
+            
+             for (int i =0; i<columnCount; i++){
+                PdfPCell cell = new PdfPCell(new Paragraph(TestFileList.get(i)));
+                table.addCell(cell);
+             }
+            
+            table.addCell(new PdfPCell(new Paragraph("Total")));
+            table.addCell(new PdfPCell(new Paragraph("Comments")));
 
             document.add(table);
 
@@ -55,41 +69,57 @@ public class GeneratePDF {
         }
          catch (DocumentException e){
             System.out.println("Error creating pdf");
-            return false; 
         }
-
-        return true; 
     }
 
-
-    public boolean AddGrade(){
-        
-
-
-
-
-
-        return true;
-    }
-
-
-
-
-    private void addTableHeader(PdfPTable table) {
-    Stream.of("Student ID", "Total Grade")
-      .forEach(columnTitle -> {
-        PdfPCell header = new PdfPCell();
-        header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-        header.setBorderWidth(2);
-        header.setPhrase(new Phrase(columnTitle));
-        table.addCell(header);
-    });
-    }
-
-    private void addRows(PdfPTable table, String ID, String mark) {
+    
+    private void addRows(String ID, ArrayList<Integer> marks ) {
+        int numColumns = marks.size();
+        System.out.println("MUMCOLUMNS: " + numColumns);
         table.addCell(ID);
-        table.addCell(mark);
+        int total = 0;
+        for (int i =0; i<numColumns; i++){
+                PdfPCell cell = new PdfPCell(new Paragraph(marks.get(i)));
+                total +=marks.get(i);
+                System.out.println("TOTAL "+ total);
+                table.addCell(cell);
+             }
+            
+        table.addCell(new PdfPCell(new Paragraph(total)));
+        table.addCell(new PdfPCell(new Paragraph("Comments")));
+
+
+        // table.addCell(mark);
     }
+
+
+    public void update(){
+        ArrayList<Integer> marks = new ArrayList<>(); 
+        String studentID = "";
+        String comment = "";
+        
+        // addRows(studentID, marks);
+        //this is a test line
+
+        marks.add(12);
+        marks.add(13);
+        marks.add(41);
+        marks.add(32);
+        
+        addRows("816031079", marks); 
+
+
+        System.out.println("the pdf observer was triggered"); 
+
+
+
+
+    }
+
+
+
+
+    
 
     
 

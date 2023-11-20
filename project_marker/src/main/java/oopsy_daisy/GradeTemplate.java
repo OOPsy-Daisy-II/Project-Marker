@@ -12,7 +12,7 @@ public abstract class GradeTemplate {
         return path.substring(index + 1);
     }
 
-
+    
 
     protected String getSpecInfo(){
 

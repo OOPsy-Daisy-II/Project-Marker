@@ -102,6 +102,16 @@ public class App
         //     System.out.println(result.getFailureCount() + " test(s) failed.");
         // }
 
-        
+        int flightscore= FlightTest.totalScore; 
+        System.out.println("the flight score is: " + flightscore);
+
+
+        //code to implement PDF Observer
+
+        AssignmentGrader AsGrader = new AssignmentGrader();
+        Observer PDFGenerator = new GeneratePDF("project_marker/src/main/java/oopsy_daisy/AssignmentSpec");
+        AsGrader.addObserver(PDFGenerator);
+        AsGrader.gradeAssignments();
+
     }
 }
