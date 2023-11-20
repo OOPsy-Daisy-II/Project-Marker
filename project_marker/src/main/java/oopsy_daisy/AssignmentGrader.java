@@ -34,6 +34,11 @@ public class AssignmentGrader implements Subject{
         }
     }
     
+    //needed for tests
+    public ArrayList<Observer> getMonitors(){
+        return monitors;
+    }
+    
     //Code for Assignment Grader section
 
     GradeTemplate Grader;
