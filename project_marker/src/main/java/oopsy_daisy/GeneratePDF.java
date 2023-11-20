@@ -20,6 +20,15 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.util.List; 
 import java.util.ArrayList; 
 
+// import com.itextpdf.io.IOException;
+// import com.itextpdf.io.image.ImageDataFactory;
+// import com.itextpdf.kernel.pdf.PdfDocument;
+// import com.itextpdf.kernel.pdf.PdfReader;
+// import com.itextpdf.kernel.pdf.PdfWriter;
+// import com.itextpdf.layout.Document;
+// import com.itextpdf.layout.element.Image;
+// import com.itextpdf.layout.element.Paragraph;
+
 public class GeneratePDF implements Observer{
     public PdfPTable table;
     int numberOfColumns = 0; 
@@ -155,7 +164,8 @@ public class GeneratePDF implements Observer{
         temp.add(newtable);
         temp.close();
 
-        
+        // com.itextpdf.kernel.pdf.PdfMerger merger = new com.itextpdf.kernel.pdf.PdfMerger(pdf);
+
 
 
         System.out.println("the pdf observer was triggered"); 
@@ -164,6 +174,9 @@ public class GeneratePDF implements Observer{
 
 
     }
+    catch (DocumentException e){
+            System.out.println("Error creating pdf");
+    }}
 
 
 
