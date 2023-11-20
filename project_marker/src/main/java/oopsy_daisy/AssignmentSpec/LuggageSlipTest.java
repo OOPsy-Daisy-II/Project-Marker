@@ -9,7 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LuggageSlipTest {
+public class LuggageSlipTest extends BaseTest{
 
   static int totalScore = 0;
   
@@ -101,8 +101,14 @@ public class LuggageSlipTest {
 
   @AfterClass
   public static void printTotal() {
-    System.out.println("Total Score: " + totalScore);
+    System.out.println("LuggageSlipTest Total Score: " + totalScore);
+    finalScore += totalScore;
   }
 
+  @Override
+  public int test() {
+    
+    return totalScore;
+}
 
 }
